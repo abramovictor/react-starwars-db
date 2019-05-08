@@ -4,7 +4,7 @@ import './header.scss';
 
 const Header = (props) => {
     return (
-        <header className="header">
+        <header className="header mb-4">
             <nav className="navbar navbar-expand-lg navbar-dark bg-dark border-bottom">
                 <div className="container">
                     <a className="navbar-brand" href="/">
