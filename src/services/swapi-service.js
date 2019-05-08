@@ -2,10 +2,9 @@ import { join as joinUrl } from 'path';
 
 const API_URL = 'https://swapi.co/api';
 
-const extractID = (planet = Object.prototype) => {
-    console.log(planet);
+const extractID = (data = Object.prototype) => {
     const idRegExp = /\/([0-9]*)\/$/;
-    return planet.url.match(idRegExp)[1];
+    return data.url.match(idRegExp)[1];
 };
 
 const transformPlanetAPI = (planet = Object.prototype) => {
@@ -20,7 +19,7 @@ const transformPlanetAPI = (planet = Object.prototype) => {
     };
 };
 
-const transformStarshipAPI = (starship = Object.prototype) => {
+const transformStarshipAPI = (starship = Promise.prototype) => {
     const id = extractID(starship);
 
     return {
@@ -58,23 +57,25 @@ const getResource = async (url = String.prototype, props = Object.prototype) => 
 };
 
 export const getAllPeople = async () => {
-    const response = await getResource('people');
-    return response.results;
+    const people = await getResource('people');
+    return people.results.map((person) => transformPersonAPI(person));
 };
 
 export const getPerson = async (id = String.prototype) => {
-    return getResource(
+    const person = await getResource(
         joinUrl('people', `${id}`)
     );
+
+    return transformPersonAPI(person);
 }
 
 export const getAllPlanets = async () => {
-    const response = await getResource('planets');
-    return response.results.map((planet) => transformPlanetAPI(planet));
+    const planets = await getResource('planets');
+    return planets.results.map((planet) => transformPlanetAPI(planet));
 };
 
 export const getPlanet = async (id = String.prototype) => {
-    const planet = getResource(
+    const planet = await getResource(
         joinUrl('planets', `${id}`)
     );
 
@@ -82,8 +83,8 @@ export const getPlanet = async (id = String.prototype) => {
 };
 
 export const getAllStraships = async () => {
-    const response = await getResource('starships');
-    return response.results;
+    const starships = await getResource('starships');
+    return starships.results.map((starship) => transformStarshipAPI(starship));
 };
 
 export const getStraship = (id = String.prototype) => {
@@ -92,7 +93,7 @@ export const getStraship = (id = String.prototype) => {
     );
 };
 
-const SwapiService = {
+export default {
     getResource,
     getAllPeople,
     getPerson,
@@ -101,5 +102,3 @@ const SwapiService = {
     getAllStraships,
     getStraship
 };
-
-export default SwapiService;
