@@ -40,6 +40,8 @@ export default class RandomPlanet extends Component {
     updatePlanet = () => {
         const id = this.randomId;
 
+        this.setState({ loading: true });
+
         getPlanet(id)
             .then(this.onPlanetLoaded)
             .catch(this.onPlanetError);

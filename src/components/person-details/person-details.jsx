@@ -1,11 +1,24 @@
 import React, { Component } from 'react';
 import { getPerson } from '../../services/swapi-service';
+import Spinner from '../spinner';
+import PersonView from './person-view';
+import ErrorIndicator from '../error-indicator'
 
 import './person-details.scss';
 
+const PersonContent = ({ children }) => {
+    return (
+        <div className="w-100 h-100 d-flex justify-content-center align-items-center">
+            {children}
+        </div>
+    );
+};
+
 export default class PersonDetails extends Component {
     state = {
-        person: null
+        person: null,
+        loading: false,
+        error: false
     };
 
     componentDidMount() {
@@ -18,50 +31,56 @@ export default class PersonDetails extends Component {
         }
     }
 
+    onPersonLoaded = (person) => {
+        this.setState({ person, loading: false, error: false });
+    };
+
+    onPersonError = (error) => {
+        this.setState({ error: true, loading: false });
+    }
+
     updatePerson() {
         const { personID } = this.props;
         if (!personID) return;
 
+        this.setState({
+            loading: true,
+            error: false
+        });
+
         getPerson(personID)
-            .then(person => this.setState({ person }));
+            .then(this.onPersonLoaded)
+            .catch(this.onPersonError);
     }
 
     render() {
-        if (!this.state.person) return (
-            <div className="alert alert-light text-white" role="alert">
-                Select a person from a list
-            </div>
-        );
+        const { person, loading, error } = this.state;
 
-        const { person: { id, name, gender, birthYear, eyeColor } } = this.state;
+        const personView = !loading && person ? (
+            <PersonView person={person} />
+        ) : null;
+        const spinner = loading ? (
+            <PersonContent>
+                <Spinner />
+            </PersonContent>
+        ) : null;
+        const message = !(person || loading || error) ? (
+            <PersonContent>
+                Select a person from a list
+            </PersonContent>
+        ) : null;
+        const errorIndicator = error ? (
+            <PersonContent>
+                <ErrorIndicator />
+            </PersonContent>
+        ) : null;
 
         return (
             <div className="person-details card flex-row">
-                <div className="col-5 p-0">
-                    <div
-                        style={{
-                            background: `url(https://starwars-visualguide.com/assets/img/characters/${id}.jpg) no-repeat center top / cover,
-                                     url(https://starwars-visualguide.com/assets/img/big-placeholder.jpg) no-repeat center top / cover`
-                        }}
-                        className="card-img-top" />
-                </div>
-
-                <div className="card-body col">
-                    <h3 className="card-title h5">
-                        {name}
-                    </h3>
-                    <ul className="list-group list-group-flush">
-                        <li className="list-group-item">
-                            <strong>Gender:</strong> {gender}
-                        </li>
-                        <li className="list-group-item">
-                            <strong>Birth Year:</strong> {birthYear}
-                        </li>
-                        <li className="list-group-item">
-                            <strong>Eye Color</strong> {eyeColor}
-                        </li>
-                    </ul>
-                </div>
+                {personView}
+                {spinner}
+                {message}
+                {errorIndicator}
             </div>
         );
     }
