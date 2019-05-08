@@ -8,7 +8,7 @@ const Header = (props) => {
             <nav className="navbar navbar-expand-lg navbar-dark bg-dark border-bottom">
                 <div className="container">
                     <a className="navbar-brand" href="/">
-                        STARWARS DB
+                        STAR WARS DB
                     </a>
     
                     <ul className="navbar-nav">

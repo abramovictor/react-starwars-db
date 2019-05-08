@@ -5,35 +5,44 @@ import './random-planet.scss';
 
 export default class RandomPlanet extends Component {
     state = {
+        id: null,
         name: null,
         population: null,
         rotationPeriod: null,
         diameter: null
     };
 
-    constructor() {
+    constructor(props) {
+        super(props);
         this.updatePlanet();
     }
 
+    get randomId() {
+        return parseInt((Math.random() * 25) + 1);
+    }
+
     updatePlanet() {
-        getPlanet(7)
+        const id = this.randomId;
+
+        getPlanet(id)
             .then(planet => this.setState({
+                id,
                 name: planet.name,
                 population: planet.population,
                 rotationPeriod: planet.rotation_period,
                 diameter: planet.diameter
-            }))
+            }));
     }
 
     render() {
-        const { name, population, rotationPeriod, diameter } = this.state;
+        const { id, name, population, rotationPeriod, diameter } = this.state;
 
         return (
             <section className="random-planet py-4">
                 <div className="container">
-                    <div className="card flex-row">
+                    <div className="card flex-row border">
                         <div className="col-4 p-0">
-                            <img src="..." className="card-img-top" alt="..." />
+                            <img src={id ? `https://starwars-visualguide.com/assets/img/planets/${id}.jpg` : ''} className="card-img-top d-blog rounded" alt={name} />
                         </div>
                         <div className="card-body col-8">
                             <h3 className="card-title h5">
