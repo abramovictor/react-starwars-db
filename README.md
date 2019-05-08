@@ -1,1 +1,1 @@
-# react-starwars-db
+# React Starwars DB
