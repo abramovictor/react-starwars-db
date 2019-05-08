@@ -8,7 +8,8 @@ import './app.scss';
 
 export default class App extends Component {
     state = {
-        visibleRandomPlanet: true
+        visibleRandomPlanet: true,
+        selectedPerson: null
     }
 
     handleToggleVisibleRandomPlanet = () => {
@@ -16,6 +17,12 @@ export default class App extends Component {
             return {
                 visibleRandomPlanet: !state.visibleRandomPlanet
             }
+        });
+    };
+
+    handlePersonSelected = (id) => {
+        this.setState({
+            selectedPerson: id
         });
     };
 
@@ -40,11 +47,11 @@ export default class App extends Component {
                 <section>
                     <div className="container">
                         <div className="row">
-                            <div className="col-6">
-                                <ItemList />
+                            <div className="col-5">
+                                <ItemList onPersonSelected={this.handlePersonSelected} />
                             </div>
-                            <div className="col-6">
-                                <PersonDetails />
+                            <div className="col">
+                                <PersonDetails personID={this.state.selectedPerson} />
                             </div>
                         </div>
                     </div>

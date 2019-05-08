@@ -9,7 +9,7 @@ const PlanetView = (props) => {
                 <div
                     style={{
                         background: `url(https://starwars-visualguide.com/assets/img/planets/${id}.jpg) no-repeat center / cover,
-                                     url(https://starwars-visualguide.com/assets/img/placeholder.jpg) no-repeat center top / cover`
+                                     url(https://starwars-visualguide.com/assets/img/big-placeholder.jpg) no-repeat center top / cover`
                     }}
                     className="card-img-top" />
             </div>

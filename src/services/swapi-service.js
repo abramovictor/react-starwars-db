@@ -1,6 +1,4 @@
-import { join as joinUrl } from 'path';
-
-const API_URL = 'https://swapi.co/api';
+const API_URL = 'http://cors-anywhere.herokuapp.com/https://swapi.co/api';
 
 const extractID = (data = Object.prototype) => {
     const idRegExp = /\/([0-9]*)\/$/;
@@ -41,15 +39,15 @@ const transformPersonAPI = (person = Object.prototype) => {
     return {
         id,
         name: person.name,
-        gendet: person.gender,
-        birthYear: person.birsthYear,
-        eyeColor: person.eyeColor
+        gender: person.gender,
+        birthYear: person.birth_year,
+        eyeColor: person.eye_color
     };
 };
 
 const getResource = async (url = String.prototype, props = Object.prototype) => {
     const response = await fetch(
-        joinUrl(API_URL, url),
+        `${API_URL}/${url}`,
         props
     );
     if (!response.ok) throw new Error(`Could not fetch data ${url}, received ${response.status}`);
@@ -62,10 +60,7 @@ export const getAllPeople = async () => {
 };
 
 export const getPerson = async (id = String.prototype) => {
-    const person = await getResource(
-        joinUrl('people', `${id}`)
-    );
-
+    const person = await getResource(`people/${id}`);
     return transformPersonAPI(person);
 }
 
@@ -75,10 +70,7 @@ export const getAllPlanets = async () => {
 };
 
 export const getPlanet = async (id = String.prototype) => {
-    const planet = await getResource(
-        joinUrl('planets', `${id}`)
-    );
-
+    const planet = await getResource(`planets/${id}`);
     return transformPlanetAPI(planet);
 };
 
@@ -87,10 +79,9 @@ export const getAllStraships = async () => {
     return starships.results.map((starship) => transformStarshipAPI(starship));
 };
 
-export const getStraship = (id = String.prototype) => {
-    return getResource(
-        joinUrl('starships', `${id}`)
-    );
+export const getStraship = async (id = String.prototype) => {
+    const starship = await getResource(`starships/${id}`);
+    return transformStarshipAPI(starship);
 };
 
 export default {

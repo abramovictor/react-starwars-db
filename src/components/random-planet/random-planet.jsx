@@ -17,6 +17,10 @@ export default class RandomPlanet extends Component {
         this.updatePlanet();
         this.interval = setInterval(this.updatePlanet, 5000);
     }
+
+    componentWillUnmount() {
+        clearInterval(this.interval);
+    }
     
     get randomId() {
         return parseInt((Math.random() * 25) + 3);

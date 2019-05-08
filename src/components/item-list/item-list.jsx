@@ -1,16 +1,44 @@
 import React, { Component } from 'react';
+import { getAllPeople } from '../../services/swapi-service';
+import Spinner from '../spinner';
 import './item-list.scss';
 
 export default class ItemList extends Component {
+    state = {
+        peopleList: null
+    };
+
+    componentDidMount() {
+        getAllPeople()
+            .then(peopleList => {
+                this.setState({ peopleList });
+            });
+    }
+
+    renderPeople(peopleList) {
+        return peopleList.map(({ id, name }) => (
+            <button
+                key={id}
+                onClick={() => this.props.onPersonSelected(id)}
+                className="list-group-item btn btn-light">
+                {name}
+            </button>
+        ));
+    }
+
     render() {
+        const { peopleList } = this.state;
+        if (!peopleList) return (
+            <div className="d-flex justify-content-center align-items-center w-100 h-100">
+                <Spinner />
+            </div>
+        );
+
+        const listItems = this.renderPeople(peopleList);
         return (
-            <ul className="list-group list-group-flush">
-                <li className="list-group-item">Cras justo odio</li>
-                <li className="list-group-item">Dapibus ac facilisis in</li>
-                <li className="list-group-item">Morbi leo risus</li>
-                <li className="list-group-item">Porta ac consectetur ac</li>
-                <li className="list-group-item">Vestibulum at eros</li>
-            </ul>
+            <div className="list-group list-group-flush">
+                {listItems}
+            </div>
         );
     }
 }
