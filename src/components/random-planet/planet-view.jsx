@@ -18,7 +18,7 @@ const PlanetView = (props) => {
                 <h3 className="card-title h5">
                     {name}
                 </h3>
-                <ul className="list-group list-group-flushs">
+                <ul className="list-group">
                     <li className="list-group-item">
                         <strong>Population:</strong> {population}
                     </li>

@@ -20,7 +20,7 @@ export default class ItemList extends Component {
             <button
                 key={id}
                 onClick={() => this.props.onPersonSelected(id)}
-                className="list-group-item btn btn-light">
+                className="btn btn-outline-dark shadow-none border-bottom rounded-0">
                 {name}
             </button>
         ));
@@ -36,7 +36,7 @@ export default class ItemList extends Component {
 
         const listItems = this.renderPeople(peopleList);
         return (
-            <div className="list-group list-group-flush">
+            <div className="list-item card list-group list-group-flush">
                 {listItems}
             </div>
         );

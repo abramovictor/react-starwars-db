@@ -6,11 +6,12 @@ const PersonView = (props) => {
     return (
         <Fragment>
             <div className="col-5 p-0">
-                <div
-                    style={{
-                        background: `url(https://starwars-visualguide.com/assets/img/characters/${id}.jpg) no-repeat center top / cover,
-                                     url(https://starwars-visualguide.com/assets/img/big-placeholder.jpg) no-repeat center top / cover`
+            <img
+                    onError={(error) => {
+                        error.target.src = 'https://starwars-visualguide.com/assets/img/big-placeholder.jpg';
                     }}
+                    alt={name}
+                    src={`https://starwars-visualguide.com/assets/img/characters/${id}.jpg`}
                     className="card-img-top h-100" />
             </div>
 
@@ -18,7 +19,7 @@ const PersonView = (props) => {
                 <h3 className="card-title h5">
                     {name}
                 </h3>
-                <ul className="list-group list-group-flush">
+                <ul className="list-group">
                     <li className="list-group-item">
                         <strong>Gender:</strong> {gender}
                     </li>

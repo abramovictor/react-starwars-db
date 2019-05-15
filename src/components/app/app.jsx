@@ -35,14 +35,14 @@ export default class App extends Component {
             <div id="app-starwars-db" className="app pb-5">
                 <Header />
                 <div className="container mb-4">
-                    <div class="custom-control custom-switch">
+                    <div className="custom-control custom-switch">
                         <input
-                            onClick={this.handleToggleVisibleRandomPlanet}
+                            onChange={this.handleToggleVisibleRandomPlanet}
                             type="checkbox"
-                            class="custom-control-input"
+                            className="custom-control-input"
                             id="togglePlanet"
                             checked={visibleRandomPlanet} />
-                        <label class="custom-control-label" for="togglePlanet">
+                        <label className="custom-control-label" htmlFor="togglePlanet">
                             Toggle Random Planet
                         </label>
                     </div>
@@ -54,10 +54,12 @@ export default class App extends Component {
                     <div className="container">
                         <div className="row">
                             <div className="col-5">
-                                <ItemList onPersonSelected={this.handlePersonSelected} />
+                                <ItemList
+                                    onPersonSelected={this.handlePersonSelected} />
                             </div>
                             <div className="col">
-                                <PersonDetails personID={this.state.selectedPerson} />
+                                <PersonDetails
+                                    personID={this.state.selectedPerson} />
                             </div>
                         </div>
                     </div>
