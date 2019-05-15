@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react';
+import ErrorButton from '../error-button';
 
 const PersonView = (props) => {
     const { id, name, gender, birthYear, eyeColor } = props.person;
@@ -6,7 +7,7 @@ const PersonView = (props) => {
     return (
         <Fragment>
             <div className="col-5 p-0">
-            <img
+                <img
                     onError={(error) => {
                         error.target.src = 'https://starwars-visualguide.com/assets/img/big-placeholder.jpg';
                     }}
@@ -30,7 +31,10 @@ const PersonView = (props) => {
                         <strong>Eye Color</strong> {eyeColor}
                     </li>
                 </ul>
+
+                <ErrorButton />
             </div>
+
         </Fragment>
     );
 };

@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import Header from '../header';
 import RandomPlanet from '../random-planet';
-import ItemList from '../item-list';
-import PersonDetails from '../person-details';
 import ErrorIndicator from '../error-indicator';
+import PeoplePage from '../people-page';
 
 import './app.scss';
 
@@ -24,12 +23,6 @@ export default class App extends Component {
             return {
                 visibleRandomPlanet: !state.visibleRandomPlanet
             }
-        });
-    };
-
-    handlePersonSelected = (id) => {
-        this.setState({
-            selectedPerson: id
         });
     };
 
@@ -64,20 +57,10 @@ export default class App extends Component {
 
                 {randomPlanet}
 
-                <section>
-                    <div className="container">
-                        <div className="row">
-                            <div className="col-5">
-                                <ItemList
-                                    onPersonSelected={this.handlePersonSelected} />
-                            </div>
-                            <div className="col">
-                                <PersonDetails
-                                    personID={this.state.selectedPerson} />
-                            </div>
-                        </div>
-                    </div>
-                </section>
+                <PeoplePage />
+                <PeoplePage />
+                <PeoplePage />
+
             </div>
         );
     }

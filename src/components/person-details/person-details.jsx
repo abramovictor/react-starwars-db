@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { getPerson } from '../../services/swapi-service';
 import Spinner from '../spinner';
 import PersonView from './person-view';
-import ErrorIndicator from '../error-indicator'
+import ErrorIndicator from '../error-indicator';
 
 import './person-details.scss';
 

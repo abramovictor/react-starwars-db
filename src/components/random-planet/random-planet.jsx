@@ -23,7 +23,7 @@ export default class RandomPlanet extends Component {
     }
     
     get randomId() {
-        return parseInt((Math.random() * 25) + 3);
+        return parseInt((Math.random() * 25 - 3) + 3);
     }
 
     onPlanetLoaded = (planet) => {
@@ -55,7 +55,7 @@ export default class RandomPlanet extends Component {
                 <ErrorIndicator />
             </div>
         ) : null;
-        const speinner = loading ? (
+        const speinner = loading && !error ? (
             <div className="d-flex justify-content-center align-items-center w-100">
                 <Spinner />
             </div>
@@ -63,7 +63,7 @@ export default class RandomPlanet extends Component {
         const content = !(loading || error) ? <PlanetView planet={planet} /> : null;
 
         return (
-            <section className="random-planet mb-4">
+            <section className="random-planet py-2">
                 <div className="container">
                     <div className="card flex-row">
                         {errorMessage}
