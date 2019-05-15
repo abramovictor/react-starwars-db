@@ -17,14 +17,19 @@ export default class ItemList extends Component {
     }
 
     renderItem(itemList) {
-        return itemList.map(({ id, name }) => (
-            <button
-                key={id}
-                onClick={() => this.props.onPersonSelected(id)}
-                className="btn btn-outline-dark shadow-none border-bottom rounded-0">
-                {name}
-            </button>
-        ));
+        return itemList.map((item) => {
+            const { id } = item;
+            const label = this.props.renderItem(item);
+
+            return (
+                <button
+                    key={id}
+                    onClick={() => this.props.onPersonSelected(id)}
+                    className="btn btn-outline-dark shadow-none border-bottom rounded-0">
+                    {label}
+                </button>
+            );
+        });
     }
 
     render() {

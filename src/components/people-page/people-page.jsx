@@ -36,6 +36,9 @@ export default class PeoplePage extends Component {
                     <div className="row">
                         <div className="col-5">
                             <ItemList
+                                renderItem={({ name, gender, birthYear }) => (
+                                    `${name} (${gender}, ${birthYear})`
+                                )}
                                 getData={getAllPeople}
                                 onPersonSelected={this.handlePersonSelected} />
                         </div>

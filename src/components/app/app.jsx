@@ -7,7 +7,6 @@ import ItemList from '../item-list';
 import PersonDetails from '../person-details';
 import { getAllPlanets, getAllStraships } from '../../services/swapi-service';
 
-
 import './app.scss';
 
 export default class App extends Component {
@@ -44,6 +43,7 @@ export default class App extends Component {
         return (
             <div id="app-starwars-db" className="app pb-5">
                 <Header />
+
                 <div className="container mb-4">
                     <div className="custom-control custom-switch">
                         <input
@@ -67,6 +67,7 @@ export default class App extends Component {
                         <div className="row">
                             <div className="col-5">
                                 <ItemList
+                                    renderItem={({ name }) => name}
                                     getData={getAllPlanets}
                                     onPersonSelected={this.handlePersonSelected} />
                             </div>
@@ -83,6 +84,7 @@ export default class App extends Component {
                         <div className="row">
                             <div className="col-5">
                                 <ItemList
+                                    renderItem={({ name }) => name}
                                     getData={getAllStraships}
                                     onPersonSelected={this.handlePersonSelected} />
                             </div>
