@@ -3,14 +3,21 @@ import Header from '../header';
 import RandomPlanet from '../random-planet';
 import ItemList from '../item-list';
 import PersonDetails from '../person-details';
+import ErrorIndicator from '../error-indicator';
 
 import './app.scss';
 
 export default class App extends Component {
     state = {
         visibleRandomPlanet: true,
-        selectedPerson: null
+        selectedPerson: null,
+        hasError: false
     };
+
+    componentDidCatch() {
+        console.log('componentDidCatch');
+        this.setState({ hasError: true });
+    }
 
     handleToggleVisibleRandomPlanet = () => {
         this.setState(state => {
@@ -27,9 +34,16 @@ export default class App extends Component {
     };
 
     render() {
-        const { visibleRandomPlanet } = this.state;
+        if (this.state.hasError) {
+            return (
+                <ErrorIndicator />
+            );
+        }
 
-        const randomPlanet = visibleRandomPlanet ? <RandomPlanet /> : null
+        const { visibleRandomPlanet } = this.state;
+        const randomPlanet = visibleRandomPlanet ? (
+            <RandomPlanet />
+        ) : null;
 
         return (
             <div id="app-starwars-db" className="app pb-5">

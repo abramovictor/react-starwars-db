@@ -35,7 +35,7 @@ export default class PersonDetails extends Component {
         this.setState({ person, loading: false, error: false });
     };
 
-    onPersonError = (error) => {
+    onPersonError = () => {
         this.setState({ error: true, loading: false });
     }
 

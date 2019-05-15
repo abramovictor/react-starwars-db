@@ -1,4 +1,5 @@
 import React from 'react';
+import Icons from '../icons';
 
 import './header.scss';
 
@@ -8,6 +9,7 @@ const Header = (props) => {
             <nav className="navbar navbar-expand-lg navbar-dark bg-dark border-bottom">
                 <div className="container">
                     <a className="navbar-brand" href="/">
+                        <Icons.DeathStar height="40" width="40" className="mr-2" />
                         STAR WARS DB
                     </a>
     
