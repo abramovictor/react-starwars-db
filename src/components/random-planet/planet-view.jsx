@@ -6,11 +6,12 @@ const PlanetView = (props) => {
     return (
         <Fragment>
             <div className="col-4 p-0">
-                <div
-                    style={{
-                        background: `url(https://starwars-visualguide.com/assets/img/planets/${id}.jpg) no-repeat center / cover,
-                                     url(https://starwars-visualguide.com/assets/img/big-placeholder.jpg) no-repeat center top / cover`
+                <img
+                    onError={(error) => {
+                        error.target.src = 'https://starwars-visualguide.com/assets/img/big-placeholder.jpg';
                     }}
+                    alt={name}
+                    src={`https://starwars-visualguide.com/assets/img/planets/${id}.jpg`}
                     className="card-img-top" />
             </div>
             <div className="card-body col">

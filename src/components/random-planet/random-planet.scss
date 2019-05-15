@@ -1,11 +1,13 @@
 .random-planet {
     .card {
         height: 350px;
+        overflow: hidden;
     }
 
     .card-img-top {
         display: block;
         width: 100%;
         height: 100%;
+        object-fit: cover;
     }
 }

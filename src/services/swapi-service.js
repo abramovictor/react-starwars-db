@@ -17,7 +17,7 @@ const transformPlanetAPI = (planet = Object.prototype) => {
     };
 };
 
-const transformStarshipAPI = (starship = Promise.prototype) => {
+const transformStarshipAPI = (starship = Object.prototype) => {
     const id = extractID(starship);
 
     return {

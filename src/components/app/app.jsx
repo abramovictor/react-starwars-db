@@ -10,7 +10,7 @@ export default class App extends Component {
     state = {
         visibleRandomPlanet: true,
         selectedPerson: null
-    }
+    };
 
     handleToggleVisibleRandomPlanet = () => {
         this.setState(state => {
@@ -32,17 +32,23 @@ export default class App extends Component {
         const randomPlanet = visibleRandomPlanet ? <RandomPlanet /> : null
 
         return (
-            <div id="app-starwars-db" className="app">
+            <div id="app-starwars-db" className="app pb-5">
                 <Header />
-                {randomPlanet}
-
                 <div className="container mb-4">
-                    <button
-                        onClick={this.handleToggleVisibleRandomPlanet}
-                        className="btn btn-dark btn-sm">
-                        Toggle Random Planet
-                    </button>
+                    <div class="custom-control custom-switch">
+                        <input
+                            onClick={this.handleToggleVisibleRandomPlanet}
+                            type="checkbox"
+                            class="custom-control-input"
+                            id="togglePlanet"
+                            checked={visibleRandomPlanet} />
+                        <label class="custom-control-label" for="togglePlanet">
+                            Toggle Random Planet
+                        </label>
+                    </div>
                 </div>
+
+                {randomPlanet}
 
                 <section>
                     <div className="container">
