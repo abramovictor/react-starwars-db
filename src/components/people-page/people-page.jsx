@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
+import ErrorIndicator from '../error-indicator';
 import ItemList from '../item-list';
 import PersonDetails from '../person-details';
-import ErrorIndicator from '../error-indicator';
+import { getAllPeople } from '../../services/swapi-service'
 
 import './people-page.scss';
 
@@ -35,6 +36,7 @@ export default class PeoplePage extends Component {
                     <div className="row">
                         <div className="col-5">
                             <ItemList
+                                getData={getAllPeople}
                                 onPersonSelected={this.handlePersonSelected} />
                         </div>
                         <div className="col">
