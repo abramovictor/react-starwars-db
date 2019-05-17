@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import ErrorButton from '../error-button';
 
-const PersonView = (props) => {
+const ItemView = (props) => {
     const { id, name, gender, birthYear, eyeColor } = props.person;
 
     return (
@@ -39,4 +39,4 @@ const PersonView = (props) => {
     );
 };
 
-export default PersonView;
+export default ItemView;

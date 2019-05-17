@@ -3,9 +3,6 @@ import Header from '../header';
 import RandomPlanet from '../random-planet';
 import ErrorIndicator from '../error-indicator';
 import PeoplePage from '../people-page';
-import ItemList from '../item-list';
-import PersonDetails from '../person-details';
-import { getAllPlanets, getAllStraships } from '../../services/swapi-service';
 
 import './app.scss';
 
@@ -62,40 +59,7 @@ export default class App extends Component {
 
                 <PeoplePage />
 
-                <section className="py-5">
-                    <div className="container">
-                        <div className="row">
-                            <div className="col-5">
-                                <ItemList
-                                    renderItem={({ name }) => name}
-                                    getData={getAllPlanets}
-                                    onPersonSelected={this.handlePersonSelected} />
-                            </div>
-                            <div className="col">
-                                <PersonDetails
-                                    personID={this.state.selectedPerson} />
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <section className="py-5">
-                    <div className="container">
-                        <div className="row">
-                            <div className="col-5">
-                                <ItemList
-                                    renderItem={({ name }) => name}
-                                    getData={getAllStraships}
-                                    onPersonSelected={this.handlePersonSelected} />
-                            </div>
-                            <div className="col">
-                                <PersonDetails
-                                    personID={this.state.selectedPerson} />
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
+                
             </div>
         );
     }

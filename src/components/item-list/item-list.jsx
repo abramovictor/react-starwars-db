@@ -19,7 +19,7 @@ export default class ItemList extends Component {
     renderItem(itemList) {
         return itemList.map((item) => {
             const { id } = item;
-            const label = this.props.renderItem(item);
+            const label = this.props.children(item);
 
             return (
                 <button
@@ -40,10 +40,10 @@ export default class ItemList extends Component {
             </div>
         );
 
-        const listItems = this.renderItem(itemList);
+        const items = this.renderItem(itemList);
         return (
             <div className="list-item card list-group list-group-flush">
-                {listItems}
+                {items}
             </div>
         );
     }

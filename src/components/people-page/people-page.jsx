@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import ErrorIndicator from '../error-indicator';
 import ItemList from '../item-list';
-import PersonDetails from '../person-details';
+import ItemDetails from '../item-details';
 import { getAllPeople } from '../../services/swapi-service'
+import Wrapper from '../wrapper';
+import ErrorBoundry from '../error-boundry';
 
 import './people-page.scss';
 
@@ -13,10 +14,6 @@ export default class PeoplePage extends Component {
         hasError: false
     };
 
-    componentDidCatch() {
-        this.setState({ hasError: true });
-    }
-
     handlePersonSelected = (id) => {
         this.setState({
             selectedPerson: id
@@ -24,31 +21,31 @@ export default class PeoplePage extends Component {
     };
 
     render() {
-        if (this.state.hasError) {
-            return (
-                <ErrorIndicator />
-            );
-        }
+        const itemList = (
+            <ErrorBoundry>
+                <ItemList
+                    getData={getAllPeople}
+                    onPersonSelected={this.handlePersonSelected}>
+                    {(item) => (
+                        `${item.name} (${item.birthYear})`
+                    )}
+                </ItemList>
+            </ErrorBoundry>
+        );
+
+        const personDetails = (
+            <ErrorBoundry>
+                <ItemDetails
+                    personID={this.state.selectedPerson} />
+            </ErrorBoundry>
+        );
 
         return (
-            <section className="py-5">
-                <div className="container">
-                    <div className="row">
-                        <div className="col-5">
-                            <ItemList
-                                renderItem={({ name, gender, birthYear }) => (
-                                    `${name} (${gender}, ${birthYear})`
-                                )}
-                                getData={getAllPeople}
-                                onPersonSelected={this.handlePersonSelected} />
-                        </div>
-                        <div className="col">
-                            <PersonDetails
-                                personID={this.state.selectedPerson} />
-                        </div>
-                    </div>
-                </div>
-            </section>
+            <ErrorBoundry>
+                <Wrapper
+                    left={itemList}
+                    right={personDetails} />
+            </ErrorBoundry>
         );
     }
 };
